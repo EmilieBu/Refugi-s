@@ -1,0 +1,3 @@
+tropi_camps_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: TropiCampsBundle:Default:index }
