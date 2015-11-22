@@ -63,6 +63,33 @@ class Camp
      */
     private $description;
 
+	
+	 /**
+     * @var boolean
+     *
+     * @ORM\Column(name="plein", type="boolean")
+     */
+    private $plein;
+	
+	 /**
+     * @var integer
+     *
+     * @ORM\Column(name="placeTotale", type="integer")
+     */
+    private $placeTotale;
+	
+	 /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_refugie", type="integer")
+     */
+    private $nb_refugie;
+	
+	/**
+     * @ORM\OneToOne(targetEntity="Tropi\CampsBundle\Entity\Centrale", cascade={"persist"})
+     */
+    private $centrale;
+
 
     /**
      * Get id
@@ -216,6 +243,89 @@ class Camp
     public function getDescription()
     {
         return $this->description;
+    }
+	
+	/**
+     * Set plein
+     *
+     * @param boolean $plein
+     *
+     * @return Refugie
+     */
+    public function setPlein($plein)
+    {
+        $this->plein = $plein;
+
+        return $this;
+    }
+
+    /**
+     * Get plein
+     *
+     * @return boolean
+     */
+    public function getPlein()
+    {
+        return $this->plein;
+    }
+	
+	 /**
+     * Set placeTotale
+     *
+     * @param integer $placeTotale
+     *
+     * @return Refugie
+     */
+    public function setPlaceTotale($placeTotale)
+    {
+        $this->placeTotale = $placeTotale;
+
+        return $this;
+    }
+
+    /**
+     * Get placeTotale
+     *
+     * @return integer
+     */
+    public function getPlaceTotale()
+    {
+        return $this->placeTotale;
+    }
+	
+	 /**
+     * Set nb_refugie
+     *
+     * @param integer $nb_refugie
+     *
+     * @return Refugie
+     */
+    public function setNb_refugie($nb_refugie)
+    {
+        $this->nb_refugie = $nb_refugie;
+
+        return $this;
+    }
+
+    /**
+     * Get nb_refugie
+     *
+     * @return integer
+     */
+    public function getNb_refugie()
+    {
+        return $this->nb_refugie;
+    }
+	
+	
+	    public function setCentrale(Centrale $centrale = null)
+    {
+        $this->centrale = $centrale;
+    }
+
+    public function getCentrale()
+    {
+        return $this->centrale;
     }
 }
 
