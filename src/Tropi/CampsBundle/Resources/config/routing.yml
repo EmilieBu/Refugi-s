@@ -1,3 +1,13 @@
-tropi_camps_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: TropiCampsBundle:Default:index }
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+oc_platform_home:
+    path:      /platform
+    defaults:  { _controller: TropiCampsBundle:Advert:index }
+    
+oc_platform_view:
+    path:      /platform/advert/{id}
+    defaults:  { _controller: TropiCampsBundle:Advert:view }
+    
+oc_platform_add:
+    path:      /platform/add
+    defaults:  { _controller: TropiCampsBundle:Advert:add }
