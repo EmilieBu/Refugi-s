@@ -1,3 +1,40 @@
-tropi_camps_homepage:
-    path:     /yo/{name}
-    defaults: { _controller: TropiCampsBundle:Default:index }
+# TROPICAMPS
+
+# page d'accueil du site
+tc_homepage:
+    path:     /
+    defaults: { _controller: TropiCampsBundle:Public:index }
+# page dediee au refugie(id)
+tc_refugie:
+    path: /ref/{id}
+    defaults: { _controller: TropiCampsBundle:Public:refugie }
+# page dediee au camp(id)
+tc_camp:
+    path: /camp/{id}
+    defaults: { _controller: TropiCampsBundle:Public:camp }
+# page des resultats de la recherche
+tc_recherche:
+    path: /result
+    defaults: { _controller: TropiCampsBundle:Public:recherche }
+
+
+# TROPICAMPS ADMIN
+
+# page d'accueil du Staff
+tca_homepage:
+    path: /admin
+    defaults: { _controller: TropiCampsBundle:Staff:recherche }
+# ajouter un refugie
+tca_add_refugie:
+    path: /admin/refugie/add
+    defaults: { _controller: TropiCampsBundle:Staff:addRef }
+# modifier un refugie
+tca_mod_refugie:
+    path: /admin/refugie/mod
+    defaults: { _controller: TropiCampsBundle:Staff:modRef }
+# supprimer un refugie
+tca_del_refugie:
+    path: /admin/refugie/del
+    defaults: { _controller: TropiCampsBundle:Staff:delRef }
+
+# reste des routes a ajt, comme add/mod/del camps
