@@ -3,19 +3,19 @@
 # page d'accueil du site
 tc_homepage:
     path:     /
-    defaults: { _controller: TropiCampsBundle:Public:index }
+    defaults: { _controller: TropiCampsBundle:Utilisateur:index }
 # page dediee au refugie(id)
 tc_refugie:
     path: /ref/{id}
-    defaults: { _controller: TropiCampsBundle:Public:refugie }
+    defaults: { _controller: TropiCampsBundle:Utilisateur:refugie }
 # page dediee au camp(id)
 tc_camp:
     path: /camp/{id}
-    defaults: { _controller: TropiCampsBundle:Public:camp }
+    defaults: { _controller: TropiCampsBundle:Utilisateur:camp }
 # page des resultats de la recherche
 tc_recherche:
     path: /result
-    defaults: { _controller: TropiCampsBundle:Public:recherche }
+    defaults: { _controller: TropiCampsBundle:Utilisateur:recherche }
 
 
 # TROPICAMPS ADMIN
