@@ -5,16 +5,32 @@ namespace Tropi\CampsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tropi\CampsBundle\Form\RefugieType;
 use Tropi\CampsBundle\Entity\Refugie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UtilisateurController extends Controller
 {
 	// tc_homepage
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $name = "Visiteur";
-        return $this->render(
-        	'TropiCampsBundle:Default:index.html.twig',
-        	array('name'=>$name));
+        $refugie = new Refugie();
+        $form = $this->createForm(new RefugieType(), $refugie,  array(
+            'action' => $this->generateUrl('tc_homepage'),
+            'method' => 'POST',
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager(); //Entity manager
+            $em->persist($refugie);
+            $em->flush();
+
+            $response = new Response(json_encode( array('err' => '0' ) ));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        return $this->render('TropiCampsBundle:Public:index.html.twig', array('form' => $form->createView()));
     }
 
     //tc_refugie
