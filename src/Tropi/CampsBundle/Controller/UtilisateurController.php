@@ -11,14 +11,15 @@ class UtilisateurController extends Controller
 	// tc_homepage
     public function indexAction()
     {
-        $name = "aze";
-        return $this->get('templating')->renderResponse(
+        $name = "Visiteur";
+        return $this->render(
         	'TropiCampsBundle:Default:index.html.twig',
         	array('name'=>$name));
     }
 
     //tc_refugie
     public function refugieAction($id){
+        var_dump($id);
     	return 0;
     }
 
