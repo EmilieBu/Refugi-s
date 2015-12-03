@@ -5,12 +5,12 @@ namespace Tropi\CampsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Centrale
+ * Produit
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Tropi\CampsBundle\Entity\CentraleRepository")
+ * @ORM\Entity(repositoryClass="Tropi\CampsBundle\Entity\ProduitRepository")
  */
-class Centrale
+class Produit
 {
     /**
      * @var integer
@@ -29,18 +29,18 @@ class Centrale
     private $nom;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="lat", type="float")
+     * @ORM\Column(name="type", type="string", length=255)
      */
-    private $lat;
+    private $type;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="lon", type="float")
+     * @ORM\Column(name="description", type="text")
      */
-    private $lon;
+    private $description;
 
 
     /**
@@ -58,7 +58,7 @@ class Centrale
      *
      * @param string $nom
      *
-     * @return Centrale
+     * @return Produit
      */
     public function setNom($nom)
     {
@@ -78,51 +78,51 @@ class Centrale
     }
 
     /**
-     * Set lat
+     * Set type
      *
-     * @param float $lat
+     * @param string $type
      *
-     * @return Centrale
+     * @return Produit
      */
-    public function setLat($lat)
+    public function setType($type)
     {
-        $this->lat = $lat;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get lat
+     * Get type
      *
-     * @return float
+     * @return string
      */
-    public function getLat()
+    public function getType()
     {
-        return $this->lat;
+        return $this->type;
     }
 
     /**
-     * Set lon
+     * Set description
      *
-     * @param float $lon
+     * @param string $description
      *
-     * @return Centrale
+     * @return Produit
      */
-    public function setLon($lon)
+    public function setDescription($description)
     {
-        $this->lon = $lon;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get lon
+     * Get description
      *
-     * @return float
+     * @return string
      */
-    public function getLon()
+    public function getDescription()
     {
-        return $this->lon;
+        return $this->description;
     }
 }
 
