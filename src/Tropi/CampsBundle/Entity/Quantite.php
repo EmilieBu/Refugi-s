@@ -27,7 +27,19 @@ class Quantite
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
-
+	
+	
+	/**
+     * @ORM\ManyToOneToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
+     */
+    private $camp;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="Tropi\CampsBundle\Entity\Produit", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
+     */
+    private $produit;
 
     /**
      * Get id
@@ -61,6 +73,27 @@ class Quantite
     public function getQuantite()
     {
         return $this->quantite;
+    }
+	
+	
+	public function setCamp(Camp $camp = null)
+    {
+        $this->camp = $camp;
+    }
+
+    public function getCamp()
+    {
+        return $this->camp;
+    }
+	
+	public function setProduit(Produit $produit = null)
+    {
+        $this->produit = $produit;
+    }
+
+    public function getProduit()
+    {
+        return $this->produit;
     }
 }
 
