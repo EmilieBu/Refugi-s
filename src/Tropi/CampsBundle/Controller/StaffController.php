@@ -19,7 +19,24 @@ class StaffController extends Controller
     #ajouter un refugie
     //tca_add_refugie
     public function addRefAction(){
-    	return 0;
+    	$refugie = new Refugie();
+        $form = $this->createForm(new RefugieType(), $refugie,  array(
+            'action' => $this->generateUrl('tc_homepage'),
+            'method' => 'POST',
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager(); //Entity manager
+            $em->persist($refugie);
+            $em->flush();
+
+            $response = new Response(json_encode( array('err' => '0' ) ));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        return $this->render('TropiCampsBundle:Public:index.html.twig', array('form' => $form->createView()));
     }
 
     #Modifier un réfugie
