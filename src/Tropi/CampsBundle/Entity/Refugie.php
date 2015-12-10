@@ -107,9 +107,10 @@ class Refugie
     private $contamine;
 
     /**
-     * @ORM\OneToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
      */
-    private $camp;
+    private $camp_id;
 
     /**
      * Get id
@@ -409,14 +410,16 @@ class Refugie
         return $this->contamine;
     }
     
-    public function setCamp(Camp $camp = null)
+    public function setCamp_id(Camp $camp_id = null)
     {
-        $this->camp = $camp;
+        $this->camp_id = $camp_id;
     }
 
-    public function getCamp()
+    public function getCamp_id()
     {
-        return $this->camp;
+        return $this->camp_id;
     }
+	
+
 }
 

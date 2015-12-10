@@ -65,6 +65,7 @@ class Camp
 	
 	/**
      * @ORM\OneToOne(targetEntity="Tropi\CampsBundle\Entity\Centrale", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
      */
     private $centrale;
 
