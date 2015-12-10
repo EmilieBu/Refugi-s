@@ -7,12 +7,13 @@ use Tropi\CampsBundle\Form\RefugieType;
 use Tropi\CampsBundle\Entity\Refugie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UtilisateurController extends Controller
 {
 	// tc_homepage
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request){
+        
         $refugie = new Refugie();
         $form = $this->createForm(new RefugieType(), $refugie,  array(
             'action' => $this->generateUrl('tc_homepage'),
@@ -35,18 +36,56 @@ class UtilisateurController extends Controller
 
     //tc_refugie
     public function refugieAction($id){
-        var_dump($id);
-    	return 0;
+        $repository = $this->getDoctrine()->getManager()->getRepository('TropiCampsBundle:Refugie');
+        $refugie = $repository->find($id);
+
+        if (null === $refugie) {
+            throw new NotFoundHttpException("Le refugie d'id ".$id." n'est pas dans notre base de données'.");
+        }
+
+        var_dump($refugie);
+        $response = new Response(json_encode( $refugie->getNom() ));
+        //$response->headers->set('Content-Type', 'application/json');
+
+    	return $response;
     }
 
     //tc_camp:
     public function campAction($id){
-    	return 0;
+        $repository = $this->getDoctrine()->getManager()->getRepository('TropiCampsBundle:Camp');
+        $camp = $repository->find($id);
+
+        if (null === $camp) {
+            throw new NotFoundHttpException("Le camp d'id ".$id." n'existe pas.");
+        }
+
+        var_dump($camp);
+        $response = new Response(json_encode( $camp->getNom() ));
+        //$response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
     //tc_recherche:
-    public function rechercheAction(){
-    	return 0;
+    public function rechercheAction($critRchrch){
+
+        $repository=$this
+        ->getDoctrine()
+        ->getManager
+        ->getRepository('TropiCampsBundle:Refugie');
+
+        $listRefugie=$repository->findBy(
+            array $critRchrch,
+            array $orderBy = null,
+            $limit = null,
+            $offset = null
+            );
+
+        var_dump(($listRefugie))
+        $response = new Response(json_encode($listRefugie));
+
+
+    	return response;
     }
 
 
