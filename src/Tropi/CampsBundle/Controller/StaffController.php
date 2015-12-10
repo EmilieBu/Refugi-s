@@ -5,20 +5,23 @@ namespace Tropi\CampsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tropi\CampsBundle\Form\RefugieType;
 use Tropi\CampsBundle\Entity\Refugie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #TROPICAMPS ADMIN
 
 class StaffController extends Controller
 {
 
-    //tca_recherche:
+    //tca_homepage:
     public function rechercheAction(){
     	return 0;
     }
 
     #ajouter un refugie
     //tca_add_refugie
-    public function addRefAction(){
+    public function addRefAction(Request $request){
     	$refugie = new Refugie();
         $form = $this->createForm(new RefugieType(), $refugie,  array(
             'action' => $this->generateUrl('tc_homepage'),

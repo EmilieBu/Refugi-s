@@ -13,13 +13,35 @@ class UtilisateurController extends Controller
 {
 	// tc_homepage
     public function indexAction(Request $request){
-        return 0;
+        
+        $refugie = new Refugie();
+        $form = $this->createForm(new RefugieType(), $refugie,  array(
+            'action' => $this->generateUrl('tc_homepage'),
+            'method' => 'POST',
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager(); //Entity manager
+            $em->persist($refugie);
+            $em->flush();
+
+            $response = new Response(json_encode( array('err' => '0' ) ));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+        return $this->render('TropiCampsBundle:Public:index.html.twig', array('form' => $form->createView()));
     }
 
     //tc_refugie
     public function refugieAction($id){
         $repository = $this->getDoctrine()->getManager()->getRepository('TropiCampsBundle:Refugie');
         $refugie = $repository->find($id);
+
+        if (null === $refugie) {
+            throw new NotFoundHttpException("Le refugie d'id ".$id." n'est pas dans notre base de données'.");
+        }
 
         var_dump($refugie);
         $response = new Response(json_encode( $refugie->getNom() ));
@@ -45,8 +67,25 @@ class UtilisateurController extends Controller
     }
 
     //tc_recherche:
-    public function rechercheAction(){
-    	return 0;
+    public function rechercheAction($critRchrch){
+
+        $repository=$this
+        ->getDoctrine()
+        ->getManager
+        ->getRepository('TropiCampsBundle:Refugie');
+
+        $listRefugie=$repository->findBy(
+            array $critRchrch,
+            array $orderBy = null,
+            $limit = null,
+            $offset = null
+            );
+
+        var_dump(($listRefugie))
+        $response = new Response(json_encode($listRefugie));
+
+
+    	return response;
     }
 
 
