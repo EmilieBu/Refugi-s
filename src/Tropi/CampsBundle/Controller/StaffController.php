@@ -8,23 +8,25 @@ use Tropi\CampsBundle\Entity\Refugie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #TROPICAMPS ADMIN
 
 class StaffController extends Controller
 {
 
-    //tca_homepage:
-    public function rechercheAction(){
-    	return 0;
+    public function indexAction(){
+        return $this->render('TropiCampsBundle:Staff:index.html.twig');
     }
-
-    #ajouter un refugie
-    //tca_add_refugie
-    public function addRefAction(Request $request){
-    	$refugie = new Refugie();
+    // affiche la liste de ref + nouveau ref
+    public function refAction(Request $request){
+        $refugie = new Refugie();
+        
+        $repository = $this->getDoctrine()->getRepository('TropiCampsBundle:Refugie');
+        $refugies = $repository->findAll();
+        
         $form = $this->createForm(new RefugieType(), $refugie,  array(
-            'action' => $this->generateUrl('tc_homepage'),
+            'action' => $this->generateUrl('tca_ref'),
             'method' => 'POST',
         ));
         $form->handleRequest($request);
@@ -34,24 +36,48 @@ class StaffController extends Controller
             $em->persist($refugie);
             $em->flush();
 
-            $response = new Response(json_encode( array('err' => '0' ) ));
-            $response->headers->set('Content-Type', 'application/json');
-            return $response;
+            return $this->render('TropiCampsBundle:Staff:ref.html.twig', array('form' => $form->createView(),'refName' => $refugie->getNom(),'refugies' => $refugies));
         }
-
-        return $this->render('TropiCampsBundle:Public:index.html.twig', array('form' => $form->createView()));
+        return $this->render('TropiCampsBundle:Staff:ref.html.twig', array('form' => $form->createView(),'refugies' => $refugies));
     }
-
+    
     #Modifier un réfugie
     //tca_mod_refugie
-    public function modRefAction(){
-    	return 0;
+    public function modRefAction($id){
+        $request = $this->get('request');
+        $em = $this->getDoctrine()->getEntityManager();
+        $refugie = $em->getRepository('TropiCampsBundle:Refugie')->find($id);
+        
+        if(!isset($refugie)){
+            return new RedirectResponse($this->generateUrl('tca_ref'));
+        }
+        $form = $this->createForm(new RefugieType(), $refugie,  array(
+        'action' => $this->generateUrl('tca_mod_refugie',array('id'=>$id)),
+        'method' => 'POST',
+        ));
+        
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+            if ($form->isValid())
+            {
+                $em->persist($refugie);
+                $em->flush();
+            }
+        }
+        return $this->render('TropiCampsBundle:Staff:refpage.html.twig', array('form' => $form->createView(),'refugie' => $refugie)); 
     }
 
     #Supprimer un refugie
     //tca_del_refugie:
-    public function delRef(){
-    	return 0;
+    public function delRefAction($id){
+         $em = $this->getDoctrine()->getEntityManager();
+        $refugie = $em->getRepository('TropiCampsBundle:Refugie')->find($id);
+        if(!isset($refugie)){
+            return new RedirectResponse($this->generateUrl('tca_ref'));
+        }
+        $em->remove($refugie);
+        $em->flush();
+    	return new RedirectResponse($this->generateUrl('tca_ref'));
     }
 
 
