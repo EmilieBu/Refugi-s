@@ -1,0 +1,67 @@
+{% extends "TropiCampsBundle:Staff:layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} Admin-camp
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<div class="container" style="padding: 70px auto;margin-top:70px">
+    <h1>{{ camp.name }}</h1>
+    
+    <table class="table">
+        <thead> 
+            <tr>
+                <th>#</th>
+                <th>Produit</th>
+                <th>Quantité requise</th>
+                <th>Quantité en stock</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead> 
+        <tbody>
+        {% for product in camp.quantite %}
+            <tr {% if product.quantite < 0.5*product.quantiteRequired %}
+                    {% if product.quantite < 0.3*product.quantiteRequired %}
+                        class="danger"
+                    {% else %}
+                        class="warning"
+                    {% endif %}
+                {% endif %}
+                {% if product.quantite > 2*product.quantiteRequired %}
+                     class="success"
+                {% endif %}
+            >
+                <th scope="row">{{ product.id }}</th>
+                <th>{{ product.produit }}</th>
+                <th>{{ product.quantiteRequired }}</th>
+                <th>{{ product.quantite }}</th>
+                <th><a href="{{ path('tca_stock_add',{'id':camp.id,'pid':product.produit.id}) }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></th>
+            </tr>
+        {% endfor %}
+        {% for product in products %}
+            {% set def = true %}
+            {% for qtt in camp.quantite %}
+                {% if qtt.produit == product %}
+                    {% set def = false %}
+                {% endif %}
+            {% endfor %}
+            {% if def %}
+            <tr class="active">
+                <th scope="row">{{ product.id }}</th>
+                <th>{{ product }}</th>
+                <th>indéfini</th>
+                <th>indéfini</th>
+                <th><a href="{{ path('tca_stock_def',{'id':camp.id,'pid':product.id}) }}" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

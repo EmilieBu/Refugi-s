@@ -23,18 +23,41 @@ tc_recherche:
 # page d'accueil du Staff
 tca_homepage:
     path: /admin
-    defaults: { _controller: TropiCampsBundle:Staff:recherche }
-# ajouter un refugie
+    defaults: { _controller: TropiCampsBundle:Staff:index }
+tca_ref:
+    path: /admin/refugie
+    defaults: { _controller: TropiCampsBundle:Staff:ref }
+# ajouter un refugie // a supprimer
 tca_add_refugie:
     path: /admin/refugie/add
     defaults: { _controller: TropiCampsBundle:Staff:addRef }
 # modifier un refugie
 tca_mod_refugie:
-    path: /admin/refugie/mod
+    path: /admin/refugie/mod/{id}
     defaults: { _controller: TropiCampsBundle:Staff:modRef }
 # supprimer un refugie
 tca_del_refugie:
-    path: /admin/refugie/del
+    path: /admin/refugie/del/{id}
     defaults: { _controller: TropiCampsBundle:Staff:delRef }
-
-# reste des routes a ajt, comme add/mod/del camps
+tca_camp:
+    path: /admin/camp
+    defaults: { _controller: TropiCampsBundle:Staff:camp }
+# ajouter un refugie // a supprimer
+tca_camp_page:
+    path: /admin/camp/{id}
+    defaults: { _controller: TropiCampsBundle:Staff:campPage }
+tca_stock:
+    path: /admin/stock
+    defaults: { _controller: TropiCampsBundle:Staff:stock }
+tca_stock_page:
+    path: /admin/stock/{id}
+    defaults: { _controller: TropiCampsBundle:Staff:stockPage }
+tca_stock_add:
+    path: /admin/stock/{id}/{pid}/add
+    defaults: { _controller: TropiCampsBundle:Staff:stockAdd }
+tca_stock_sub:
+    path: /admin/stock/{id}/{pid}/sub
+    defaults: { _controller: TropiCampsBundle:Staff:stockSub }
+tca_stock_def:
+    path: /admin/stock/{id}/{pid}/def
+    defaults: { _controller: TropiCampsBundle:Staff:stockDef }

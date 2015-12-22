@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Quantite
 {
+    public function __construct(Camp $camp, Produit $product)
+    {
+        $this->camp = $camp;
+        $this->produit = $product;
+        $this->quantite = 0;
+        $this->quantiteRequired = 0;
+    }
     /**
      * @var integer
      *
@@ -27,10 +34,17 @@ class Quantite
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantiteRequired", type="integer")
+     */
+    private $quantiteRequired;
 	
 	
 	/**
-     * @ORM\ManyToOneToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
      */
     private $camp;
@@ -74,7 +88,31 @@ class Quantite
     {
         return $this->quantite;
     }
-	
+    
+    /**
+     * Set quantiteRequired
+     *
+     * @param integer $quantiteRequired
+     *
+     * @return QuantiteRequired
+     */
+    public function setQuantiteRequired($quantiteRequired)
+    {
+        $this->quantiteRequired = $quantiteRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer
+     */
+    public function getQuantiteRequired()
+    {
+        return $this->quantiteRequired;
+    }
+
 	
 	public function setCamp(Camp $camp = null)
     {

@@ -1,0 +1,21 @@
+{% extends "TropiCampsBundle:Staff:layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} Admin
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<div class="container" style="padding:70px 0;">
+    <h1>Définir un produit</h1>
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Définir</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

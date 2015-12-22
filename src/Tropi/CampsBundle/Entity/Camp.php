@@ -3,6 +3,9 @@
 namespace Tropi\CampsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Tropi\CampsBundle\Entity\Centrale;
+use Tropi\CampsBundle\Entity\Refugie;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Camp
@@ -12,6 +15,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Camp
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Refugie", mappedBy="camp")
+     */
+    protected $refugies;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Quantite", mappedBy="camp")
+     */
+    protected $quantite;
+    
+    public function __construct()
+    {
+        $this->refugies = new ArrayCollection();
+        $this->quantite = new ArrayCollection();
+    }
+    
     /**
      * @var integer
      *
@@ -64,8 +83,8 @@ class Camp
     private $description;
 	
 	/**
-     * @ORM\OneToOne(targetEntity="Tropi\CampsBundle\Entity\Centrale", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tropi\CampsBundle\Entity\Centrale", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=true)
      */
     private $centrale;
 
@@ -229,12 +248,13 @@ class Camp
      *
      * @return integer
      */
-    //public function getNb_refugie()
-    //{
-    //    return $this->nb_refugie;
-    //}
+    public function getNbRefugie()
+    {
+        $nb = count( $this->refugies );
+        return $nb;
+    }
 	
-	public function setCentrale(Centrale $centrale = null)
+	public function setCentrale(Centrale $centrale)
     {
         $this->centrale = $centrale;
     }
@@ -242,6 +262,18 @@ class Camp
     public function getCentrale()
     {
         return $this->centrale;
+    }
+    public function getRefugies()
+    {
+        return $this->refugies;
+    }
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

@@ -8,18 +8,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RefugieType extends AbstractType
 {
-    private $cheveux = array('brun' => 'Brun/noir',
+    private $cheveux = array('ind' => 'indéfini',
+                            'brun' => 'Brun/noir',
                              'blond' => 'Blond',
                             'chatain'=>'Chatain',
                              'roux'=>'Roux',
                             'bleu' => 'Bleu',
                             'autre' => 'Autre');
-    private $yeux = array('vert'=>'Vert',
+    private $yeux = array('ind' => 'indéfini',
+                            'vert'=>'Vert',
                          'bleu'=>'Bleu',
                          'rouge' => 'Rouge',
                          'noir' => 'Noir',
                          'marron' => 'Marron');
     private $countryList = array(
+        "Indéfini" => array("ind" => "inconnu"),
 	"Afrique australe" => array(
 		"ZA" => "Afrique du Sud",
 		"BW" => "Botswana",
@@ -321,7 +324,9 @@ class RefugieType extends AbstractType
 		"JE" => "Jersey",
 	),
 );
-
+    public function getCountries(){
+        return $this->countryList;
+    }
     
     /**
      * @param FormBuilderInterface $builder

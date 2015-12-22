@@ -4,7 +4,7 @@
     {% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{% block title %}TropiCamps{% endblock %}</title>
+    <title>{% block title %}TropiCamps STAFF{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,39 +25,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="active navbar-brand" href="{{ path('tc_homepage') }}">TropiCamps</a>
+          <a class="active navbar-brand" href="{{ path('tca_homepage') }}">TropiCamps Staff</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">FB</a></li>
-            <li><a href="#">TW</a></li>
-            <li><a href="#">Insta</a></li>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="{{ path('tca_ref') }}">Réfugiés</a></li>
+            <li><a href="{{ path('tca_camp') }}">Camps</a></li>
+            <li><a href="{{ path('tca_stock') }}">Stock</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ path('tca_homepage') }}">Staff</a></li>
+            <li><a href="{{ path('tc_homepage') }}">Retour au site</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
     {% block main %}{% endblock %}
-    <footer class="container-fluid">
-        <div class="row">
-            <dl class="col-xs-6 col-md-4 text-center">
-                <dt>À propos</dt>
-            </dl>
-            <dl class="col-xs-6 col-md-4 text-center">
-                <dt>TropiCamps sur les réseaux</dt>
-                <dd><a href="#">Facebook</a></dd>
-                <dd><a href="#">Twitter</a></dd>
-                <dd><a href="#">Insta</a></dd>
-            </dl>
-            <dl class="col-xs-6 col-md-4 text-center">
-                <dt>À propos</dt>
-            </dl>
-        </div>
-    </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>

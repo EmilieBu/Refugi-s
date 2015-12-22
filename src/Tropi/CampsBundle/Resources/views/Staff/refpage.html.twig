@@ -1,0 +1,36 @@
+{% extends "TropiCampsBundle:Staff:layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} Admin-réfugié
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<div class="container" style="padding:70px 0;">
+    <h1>Modifier le profil de <b>{{ refugie.nom }}</b> [{{ refugie.id }}]</h1>
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    <a href="#" class="btn btn-danger" data-toggle="modal" data-target=".modal">Supprimer</a>
+    <a href="{{ path('tca_ref') }}" class="btn btn-default">Annuler</a>
+    {{ form_end(form) }}
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a href="{{ path('tca_del_refugie',{'id':refugie.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

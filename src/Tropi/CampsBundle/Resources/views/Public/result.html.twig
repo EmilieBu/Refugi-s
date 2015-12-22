@@ -1,0 +1,49 @@
+{% extends "TropiCampsBundle:Public:layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} — resultat
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+<div class="container" style="padding:70px 0">
+    {% if refugieList is empty %}
+        <h1>Navré, la recherche n'a pas abouti</h1>
+    {% else %}
+        {% for refugie in refugieList %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ refugie.prenom }} {{ refugie.nom }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label">Ville d'origine</label>
+                        <div class="col-sm-10">
+                        <p class="form-control-static">{{ refugie.villeOrigine }}</p>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label">Taille / poids</label>
+                        <div class="col-sm-10">
+                        <p class="form-control-static">{{ refugie.taille }} / {{ refugie.poids }}</p>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label">Cheveux / yeux</label>
+                        <div class="col-sm-10">
+                        <p class="form-control-static">{{ refugie.cheveux }} / {{ refugie.yeux }}</p>
+                        </div>
+                        </div>
+                    </div>
+                    <a href="{{ path('tc_refugie',{'id':refugie.id}) }}" type="button" class="btn btn-primary pull-right">Consulter le profil</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

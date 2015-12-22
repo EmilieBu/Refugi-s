@@ -34,13 +34,20 @@ class Produit
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="unit", type="string", length=255)
+     */
+    private $unit;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable = true)
      */
-    private $description;
+    private $description = null;
 
 
     /**
@@ -102,6 +109,30 @@ class Produit
     }
 
     /**
+     * Set unit
+     *
+     * @param string $unit
+     *
+     * @return Produit
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
@@ -123,6 +154,11 @@ class Produit
     public function getDescription()
     {
         return $this->description;
+    }
+    
+    public function __toString()
+    {
+        return $this->nom.' ('.$this->unit.')';
     }
 }
 

@@ -25,51 +25,51 @@ class Refugie
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable = true)
      */
-    private $nom;
+    private $nom = null;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable = true)
      */
-    private $prenom;
+    private $prenom = null;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="age", type="integer", nullable = true)
      */
-    private $age;
+    private $age = null;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="poids", type="integer")
+     * @ORM\Column(name="poids", type="integer", nullable = true)
      */
-    private $poids;
+    private $poids = null;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="taille", type="integer")
+     * @ORM\Column(name="taille", type="integer", nullable = true)
      */
-    private $taille;
+    private $taille = null;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cheveux", type="string", length=255)
+     * @ORM\Column(name="cheveux", type="string", length=255, nullable = true)
      */
-    private $cheveux;
+    private $cheveux = null;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="yeux", type="string", length=255)
+     * @ORM\Column(name="yeux", type="string", length=255, nullable = true)
      */
-    private $yeux;
+    private $yeux = null;
 
     /**
      * @var string
@@ -81,9 +81,9 @@ class Refugie
     /**
      * @var string
      *
-     * @ORM\Column(name="villeOrigine", type="string", length=255)
+     * @ORM\Column(name="villeOrigine", type="string", length=255, nullable = true)
      */
-    private $villeOrigine;
+    private $villeOrigine = null;
 
     /**
      * @var \DateTime
@@ -108,9 +108,9 @@ class Refugie
 
     /**
      * @ORM\ManyToOne(targetEntity="Tropi\CampsBundle\Entity\Camp", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
+	 * @ORM\JoinColumn(nullable=true)
      */
-    private $camp_id;
+    private $camp;
 
     /**
      * Get id
@@ -410,14 +410,14 @@ class Refugie
         return $this->contamine;
     }
     
-    public function setCamp_id(Camp $camp_id = null)
+    public function setCamp(Camp $camp = null)
     {
-        $this->camp_id = $camp_id;
+        $this->camp = $camp;
     }
 
-    public function getCamp_id()
+    public function getCamp()
     {
-        return $this->camp_id;
+        return $this->camp;
     }
 	
 
